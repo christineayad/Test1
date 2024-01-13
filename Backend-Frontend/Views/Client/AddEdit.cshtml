@@ -1,0 +1,116 @@
+﻿@model Client
+@{
+    ViewData["Title"] = "AddEdit";
+    SelectList StatusItem =
+            new SelectList(ViewBag.statusList, "Id", "Status");
+}
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> @(Model.Id != 0 ? "Update" : "Create") Client</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Id" hidden />
+            <div class="row">
+                <div class="col-12">
+                    <div class="border p-3">
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="FirstName" type="text" class="form-control shadow border-0" />
+                            <label asp-for="FirstName" class="ms-2"></label>
+
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="LastName" type="text" class="form-control shadow border-0" />
+                            <label asp-for="LastName" class="ms-2"></label>
+
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="DateBirth" id="date-time-picker"  type="date" class="form-control shadow border-0" />
+                            <label asp-for="DateBirth" class="ms-2"></label>
+
+                            <span asp-validation-for="DateBirth" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Mobile" type="text" class="form-control shadow border-0" />
+                            <label asp-for="Mobile" class="ms-2"></label>
+
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Email" type="text" class="form-control shadow border-0" />
+                            <label asp-for="Email" class="ms-2"></label>
+
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        @if (Model.Id == 0)
+                                {
+                        <div class="form-floating py-2 col-12">
+                            <input type="file" id="imgInp" name="files" class="form-control border-0 shadow" multiple />
+                            <label asp-for="Iamge" class="ms-2"></label>
+                        </div>
+                                }
+                                 else
+                                {
+                            <div class="form-floating py-2 col-12">
+                                <input type="file"  id="imgInp" name="files" class="form-control border-0 shadow" multiple />
+                                <label asp-for="Iamge" class="ms-2"></label>
+                            </div>
+                            <div class="col-2">
+                                <img src="~/@Model.Iamge"
+                                     style="border-radius:5%; border:1px solid #bbb9b9; width:100%" />
+                            </div>
+                                }
+                        <div class="form-floating py-2 col-12">
+
+                            <select asp-for="StatusId" asp-items="StatusItem" class="form-select shadow border-0">
+                                <option value="0">--Select Martial Status--</option>
+                            </select>
+                            <label asp-for="StatusId" class="ms-2"></label>
+
+
+
+                            <span asp-validation-for="StatusId" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                @if (Model.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                }
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Client" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                                    Back to List
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/client.js"></script>
+}
+
+

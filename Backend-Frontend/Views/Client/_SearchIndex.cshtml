@@ -1,0 +1,95 @@
+﻿@model List<Test.EntityFramework.Models.ClientStatusVM>
+
+
+            <table  class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+
+                    <th>Last Name</th>
+
+                    <th>Date Birth</th>
+
+                    <th>Marital Status</th>
+
+                    <th>Mobile</th>
+                    <th>Email</th>
+
+                    <th>Operation</th>
+
+                </tr>
+            </thead>
+               <tbody>
+            @foreach (var obj in Model)
+            {
+            <tr>
+            <td>@obj.FirstName</td>
+
+            <td>@obj.LastName</td>
+
+            <td>@obj.DateBirth</td>
+            <td>@obj.Status</td>
+
+            <td>@obj.Mobile</td>
+            <td>@obj.Email</td>
+
+            <td>
+            <div class="w-75 btn-group" role="group">
+            <a asp-controller="Client" asp-action="AddEdit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+            <i class="bi bi-pencil-square"></i> Edit
+
+            </a>
+          <form asp-controller="Client" asp-action="Delete" asp-route-id="@obj.Id"
+                                  data-ajax="true" data-ajax-success="deleteItem(this)">
+
+                            <button type="submit"  class="btn btn-danger mx-2 btnDelete">
+            <i class="bi bi-trash-fill"></i> Delete
+                       @*      asp-route-id="@obj.Id" *@
+
+
+            </button>
+                            </form>
+            </div>
+            </td>
+
+            </tr>
+            }
+
+            </tbody>
+
+        </table>
+
+  @*   </div>
+</div> *@
+@* <script>
+    $(document).ready(function () {
+    $('.btnDelete').click(function () {
+    var row = $(this).closest('tr');
+    var id = $(this).data('id');
+
+    $.ajax({
+    url: '/Client/Delete', // Replace 'ControllerName' with your actual controller name
+    type: 'Post',
+    data: { Id: id },
+    success: function () {
+    row.remove(); // Remove the row from the table on successful deletion
+    },
+    error: function (xhr, status, error) {
+    // Handle the error, if any
+    }
+    });
+    });
+    });
+</script> *@
+
+
+   
+    <script>
+        function deleteItem(form)
+        {
+            var removeitem = $(form);
+            removeitem.closest("tr").remove();
+        }
+    </script>
+       
+

@@ -1,0 +1,69 @@
+﻿@model List<Test.EntityFramework.Models.ClientStatusVM>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3 ">
+
+<div class="row">
+    <div class="col-12 text-center"><h4 class="text-white py-2"> Client List</h4></div>
+
+</div>
+    </div>
+<div class="card-body p-4">
+    <div class="row pb-3">
+            <div class="col-6 col-md-6">
+                <form asp-action="Search" asp-controller="Client" method="get">
+
+
+
+                    <div class="col-auto">
+                        <input type="text" class="form-control me-1" id="search" name="searchterm" placeholder="Search" />
+                        </div>
+                    <div class="col-auto">
+
+                        <button class="btn btn-dark mt-lg-3" type="submit" onclick="searchClient()">Search by Name</button>
+                    </div>
+                </form>
+            </div>
+                
+                <div class="col-3 text-end">
+                    <a asp-controller="Client" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                        Back to List
+                    </a>
+                </div>
+            <div class="col-3 text-end">
+            <a asp-controller="Client" asp-action="AddEdit" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill"></i> Create New Client
+            </a>
+        </div>
+            
+    </div>
+
+        <div id="clientTableContainer"><partial name="_SearchIndex" model="Model" /></div>
+       
+
+    </div>
+</div>
+@section Scripts {
+   
+    <script>
+        function searchClient() {
+           var searchname= document.getElementById("search").value;
+            $.ajax({
+                url: '/Client/Search/' + searchname,
+               
+                //contentType: 'application/html; charset=utf-8',
+                type: 'GET'
+                // dataType: 'html'
+                , success: function (result) {
+                    alert("true");
+                    debugger;
+                    document.getElementById("clientTableContainer").innerHTML("asd");
+                   // console.log("coco");
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+            });
+        }
+       
+    </script>
+}
